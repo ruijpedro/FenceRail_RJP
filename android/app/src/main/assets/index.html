@@ -1,281 +1,414 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inspeção de Vedações</title>
 
-  <title>FenceRail_RJP</title>
+<style>
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#eef3f8;
+  color:#102033;
+}
 
-  <style>
-    body{
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      background:#f2f4f7;
-      color:#222;
-    }
+.header{
+  background:linear-gradient(135deg,#003b73,#0069b4);
+  color:white;
+  padding:22px 18px;
+  text-align:center;
+  border-bottom-left-radius:28px;
+  border-bottom-right-radius:28px;
+}
 
-    .topbar{
-      background:#1d3557;
-      color:white;
-      padding:20px;
-      font-size:32px;
-      font-weight:bold;
-      text-align:center;
-      box-shadow:0 2px 8px rgba(0,0,0,0.2);
-    }
+.logo{
+  font-size:34px;
+  font-weight:900;
+  letter-spacing:1px;
+}
 
-    .subtitle{
-      text-align:center;
-      padding:10px;
-      font-size:16px;
-      color:#555;
-    }
+.title{
+  font-size:22px;
+  font-weight:800;
+  margin-top:8px;
+}
 
-    .container{
-      padding:20px;
-    }
+.subtitle{
+  font-size:14px;
+  opacity:.95;
+  margin-top:4px;
+}
 
-    .card{
-      background:white;
-      border-radius:16px;
-      padding:20px;
-      margin-bottom:20px;
-      box-shadow:0 4px 10px rgba(0,0,0,0.08);
-    }
+.container{
+  padding:18px;
+}
 
-    .section-title{
-      font-size:22px;
-      font-weight:bold;
-      margin-bottom:15px;
-      color:#1d3557;
-    }
+.card{
+  background:white;
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:16px;
+  box-shadow:0 5px 14px rgba(0,0,0,.10);
+}
 
-    .btn{
-      display:block;
-      width:100%;
-      padding:18px;
-      margin-top:12px;
-      border:none;
-      border-radius:14px;
-      font-size:18px;
-      font-weight:bold;
-      cursor:pointer;
-      transition:0.2s;
-    }
+.card h2{
+  margin:0 0 14px 0;
+  color:#003b73;
+  font-size:20px;
+}
 
-    .btn-primary{
-      background:#1d3557;
-      color:white;
-    }
+label{
+  font-weight:700;
+  display:block;
+  margin-top:12px;
+  margin-bottom:6px;
+}
 
-    .btn-primary:hover{
-      background:#163047;
-    }
+input, select, textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #c8d3df;
+  border-radius:12px;
+  font-size:15px;
+  box-sizing:border-box;
+}
 
-    .btn-secondary{
-      background:#457b9d;
-      color:white;
-    }
+textarea{
+  min-height:90px;
+}
 
-    .btn-secondary:hover{
-      background:#376581;
-    }
+button{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:15px;
+  margin-top:12px;
+  font-size:16px;
+  font-weight:800;
+  color:white;
+  background:#005a9c;
+}
 
-    .field{
-      margin-bottom:15px;
-    }
+button.secondary{
+  background:#1b84c6;
+}
 
-    .field label{
-      display:block;
-      margin-bottom:6px;
-      font-weight:bold;
-    }
+button.green{
+  background:#168039;
+}
 
-    .field input,
-    .field select,
-    .field textarea{
-      width:100%;
-      padding:12px;
-      border-radius:10px;
-      border:1px solid #ccc;
-      font-size:16px;
-      box-sizing:border-box;
-    }
+button.dark{
+  background:#102033;
+}
 
-    textarea{
-      min-height:100px;
-      resize:vertical;
-    }
+.status{
+  padding:12px;
+  border-radius:12px;
+  text-align:center;
+  font-weight:800;
+  margin-top:10px;
+}
 
-    .footer{
-      text-align:center;
-      padding:25px;
-      color:#666;
-      font-size:14px;
-    }
+.bom{background:#d8f5df;color:#166534;}
+.razoavel{background:#fff3c4;color:#8a6200;}
+.mau{background:#ffd8a8;color:#a34700;}
+.critico{background:#ffc9c9;color:#8b0000;}
 
-    .status{
-      padding:10px;
-      border-radius:10px;
-      font-weight:bold;
-      text-align:center;
-      margin-top:10px;
-    }
+.small{
+  font-size:13px;
+  color:#607080;
+  margin-top:8px;
+}
 
-    .bom{
-      background:#c8f7c5;
-      color:#1b5e20;
-    }
-
-    .razoavel{
-      background:#fff3bf;
-      color:#8d6e00;
-    }
-
-    .mau{
-      background:#ffd6a5;
-      color:#b85c00;
-    }
-
-    .critico{
-      background:#ffb3b3;
-      color:#8b0000;
-    }
-
-  </style>
+.footer{
+  text-align:center;
+  font-size:12px;
+  color:#607080;
+  padding:18px;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="topbar">
-    FenceRail_RJP
+<div class="header">
+  <div class="logo">RJP</div>
+  <div class="title">Inspeção de Vedações</div>
+  <div class="subtitle">Inspeção e Cadastro de Vedações</div>
+</div>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Identificação</h2>
+
+    <label>Linha</label>
+    <input id="linha" placeholder="Ex: Linha do Oeste">
+
+    <label>Troço / Local</label>
+    <input id="troco" placeholder="Ex: Meleças - Sabugo">
+
+    <label>PK Inicial</label>
+    <input id="pkIni" placeholder="Ex: 121+450">
+
+    <label>PK Final</label>
+    <input id="pkFim" placeholder="Ex: 121+700">
+
+    <label>Lado da Via</label>
+    <select id="lado">
+      <option>Esquerdo</option>
+      <option>Direito</option>
+      <option>Ambos</option>
+    </select>
   </div>
 
-  <div class="subtitle">
-    Cadastro e inspeção de vedações ferroviárias
+  <div class="card">
+    <h2>Tipo de Vedação</h2>
+
+    <label>Tipo segundo Norma</label>
+    <select id="tipoNorma">
+      <option>Vedação Plena Via Zona Urbana</option>
+      <option>Vedação Plena Via Zona Rural</option>
+      <option>Vedação em Estações e Apeadeiros</option>
+      <option>Outro / Cadastro Existente</option>
+    </select>
+
+    <label>Tipologia</label>
+    <select id="tipologia">
+      <option>Urbana - Tipologia I</option>
+      <option>Urbana - Tipologia II</option>
+      <option>Rural - Rede 160/9/15</option>
+      <option>Estações/Apeadeiros - Painel Electrossoldado</option>
+      <option>Portão Rodoviário / Emergência</option>
+      <option>Porta de Homem</option>
+      <option>Tipo existente no Excel</option>
+    </select>
+
+    <label>Tipo existente no cadastro/Excel</label>
+    <input id="tipoExcel" placeholder="Preencher se existir no cadastro antigo">
   </div>
 
-  <div class="container">
+  <div class="card">
+    <h2>Estado de Conservação</h2>
 
-    <div class="card">
+    <label>Estado Geral</label>
+    <select id="estado" onchange="atualizarEstado()">
+      <option>Bom</option>
+      <option>Razoável</option>
+      <option>Mau</option>
+      <option>Crítico</option>
+    </select>
 
-      <div class="section-title">
-        Novo Cadastro
-      </div>
+    <div id="estadoBox" class="status bom">Estado Bom</div>
 
-      <div class="field">
-        <label>Linha</label>
-        <input type="text" placeholder="Ex: Linha do Oeste">
-      </div>
+    <label>Componentes afetados</label>
+    <select id="componente">
+      <option>Rede / Painel</option>
+      <option>Postes</option>
+      <option>Fundações / Murete</option>
+      <option>Portão</option>
+      <option>Ligação à Terra</option>
+      <option>Vegetação</option>
+      <option>Continuidade da Vedação</option>
+      <option>Outro</option>
+    </select>
 
-      <div class="field">
-        <label>PK Inicial</label>
-        <input type="text" placeholder="Ex: 121+450">
-      </div>
-
-      <div class="field">
-        <label>PK Final</label>
-        <input type="text" placeholder="Ex: 121+700">
-      </div>
-
-      <div class="field">
-        <label>Tipo de Vedação</label>
-        <select>
-          <option>Rede Metálica</option>
-          <option>Painel Rígido</option>
-          <option>Muro</option>
-          <option>Portão</option>
-          <option>Barreira</option>
-        </select>
-      </div>
-
-      <div class="field">
-        <label>Estado de Conservação</label>
-        <select id="estado" onchange="mudarEstado()">
-          <option>Bom</option>
-          <option>Razoável</option>
-          <option>Mau</option>
-          <option>Crítico</option>
-        </select>
-      </div>
-
-      <div id="estadoBox" class="status bom">
-        Estado Bom
-      </div>
-
-      <div class="field">
-        <label>Observações</label>
-        <textarea placeholder="Descreve a anomalia ou observações técnicas"></textarea>
-      </div>
-
-      <button class="btn btn-primary">
-        Guardar Cadastro
-      </button>
-
-      <button class="btn btn-secondary">
-        Marcar GPS Início
-      </button>
-
-      <button class="btn btn-secondary">
-        Marcar GPS Fim
-      </button>
-
-    </div>
-
-    <div class="card">
-
-      <div class="section-title">
-        Relatórios
-      </div>
-
-      <button class="btn btn-primary">
-        Exportar PDF
-      </button>
-
-      <button class="btn btn-primary">
-        Exportar Excel
-      </button>
-
-    </div>
-
+    <label>Observações</label>
+    <textarea id="obs" placeholder="Descrever anomalia, risco, condicionamentos e observações técnicas."></textarea>
   </div>
 
-  <div class="footer">
-    FenceRail_RJP • Ambiente Ferroviário
+  <div class="card">
+    <h2>Ação de Manutenção</h2>
+
+    <label>Tipo de intervenção</label>
+    <select id="acao">
+      <option>Sem ação imediata</option>
+      <option>Reparação</option>
+      <option>Substituição</option>
+      <option>Reforço</option>
+      <option>Limpeza / Vegetação</option>
+      <option>Reposição de Vedação</option>
+      <option>Nova Vedação</option>
+    </select>
+
+    <label>Prioridade</label>
+    <select id="prioridade">
+      <option>Baixa</option>
+      <option>Média</option>
+      <option>Alta</option>
+      <option>Urgente</option>
+    </select>
+
+    <label>Descrição da intervenção</label>
+    <textarea id="descricaoAcao" placeholder="Ex: Repor rede danificada e substituir postes inclinados."></textarea>
   </div>
 
-  <script>
+  <div class="card">
+    <h2>GPS</h2>
 
-    function mudarEstado(){
+    <button class="secondary" onclick="marcarGPS('inicio')">Marcar GPS Início</button>
+    <div class="small" id="gpsInicio">GPS início: não registado</div>
 
-      let estado =
-        document.getElementById("estado").value;
+    <button class="secondary" onclick="marcarGPS('fim')">Marcar GPS Fim</button>
+    <div class="small" id="gpsFim">GPS fim: não registado</div>
+  </div>
 
-      let box =
-        document.getElementById("estadoBox");
+  <div class="card">
+    <h2>Registo / Exportação</h2>
 
-      box.className = "status";
+    <button class="green" onclick="guardarLocal()">Guardar inspeção na APP</button>
+    <button onclick="gerarPDF()">Gerar PDF / Partilhar</button>
+    <button class="dark" onclick="sincronizarSheets()">Adicionar à folha de cadastro</button>
 
-      if(estado === "Bom"){
-        box.classList.add("bom");
+    <div class="small" id="msg">Sem sincronização efetuada.</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  RJP Rail Suite • FenceRail_RJP • Vedações
+</div>
+
+<script>
+let gpsIni = "";
+let gpsEnd = "";
+
+function atualizarEstado(){
+  const estado = document.getElementById("estado").value;
+  const box = document.getElementById("estadoBox");
+  box.className = "status";
+
+  if(estado === "Bom") box.classList.add("bom");
+  if(estado === "Razoável") box.classList.add("razoavel");
+  if(estado === "Mau") box.classList.add("mau");
+  if(estado === "Crítico") box.classList.add("critico");
+
+  box.innerText = "Estado " + estado;
+}
+
+function marcarGPS(tipo){
+  if(!navigator.geolocation){
+    alert("GPS não disponível neste dispositivo.");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    function(pos){
+      const lat = pos.coords.latitude.toFixed(6);
+      const lon = pos.coords.longitude.toFixed(6);
+      const txt = lat + ", " + lon;
+
+      if(tipo === "inicio"){
+        gpsIni = txt;
+        document.getElementById("gpsInicio").innerText = "GPS início: " + txt;
+      }else{
+        gpsEnd = txt;
+        document.getElementById("gpsFim").innerText = "GPS fim: " + txt;
       }
+    },
+    function(){
+      alert("Não foi possível obter a localização GPS.");
+    },
+    {enableHighAccuracy:true, timeout:10000}
+  );
+}
 
-      if(estado === "Razoável"){
-        box.classList.add("razoavel");
-      }
+function recolherDados(){
+  return {
+    data: new Date().toLocaleString("pt-PT"),
+    linha: document.getElementById("linha").value,
+    troco: document.getElementById("troco").value,
+    pkIni: document.getElementById("pkIni").value,
+    pkFim: document.getElementById("pkFim").value,
+    lado: document.getElementById("lado").value,
+    tipoNorma: document.getElementById("tipoNorma").value,
+    tipologia: document.getElementById("tipologia").value,
+    tipoExcel: document.getElementById("tipoExcel").value,
+    estado: document.getElementById("estado").value,
+    componente: document.getElementById("componente").value,
+    obs: document.getElementById("obs").value,
+    acao: document.getElementById("acao").value,
+    prioridade: document.getElementById("prioridade").value,
+    descricaoAcao: document.getElementById("descricaoAcao").value,
+    gpsInicio: gpsIni,
+    gpsFim: gpsEnd
+  };
+}
 
-      if(estado === "Mau"){
-        box.classList.add("mau");
-      }
+function guardarLocal(){
+  const dados = recolherDados();
+  let lista = JSON.parse(localStorage.getItem("fencerail_inspecoes") || "[]");
+  lista.push(dados);
+  localStorage.setItem("fencerail_inspecoes", JSON.stringify(lista));
+  document.getElementById("msg").innerText = "Inspeção guardada localmente.";
+  alert("Inspeção guardada na APP.");
+}
 
-      if(estado === "Crítico"){
-        box.classList.add("critico");
-      }
+function gerarPDF(){
+  const d = recolherDados();
 
-      box.innerHTML = "Estado " + estado;
-    }
+  const html = `
+  INSPEÇÃO DE VEDAÇÕES - FenceRail_RJP
 
-  </script>
+  Data: ${d.data}
+  Linha: ${d.linha}
+  Troço: ${d.troco}
+  PK: ${d.pkIni} a ${d.pkFim}
+  Lado: ${d.lado}
+
+  Tipo segundo Norma: ${d.tipoNorma}
+  Tipologia: ${d.tipologia}
+  Tipo cadastro/Excel: ${d.tipoExcel}
+
+  Estado: ${d.estado}
+  Componente afetado: ${d.componente}
+
+  Observações:
+  ${d.obs}
+
+  Ação de manutenção:
+  ${d.acao}
+  Prioridade: ${d.prioridade}
+  Descrição:
+  ${d.descricaoAcao}
+
+  GPS início: ${d.gpsInicio}
+  GPS fim: ${d.gpsFim}
+  `;
+
+  const blob = new Blob([html], {type:"text/plain"});
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "Inspecao_Vedacoes_FenceRail_RJP.txt";
+  a.click();
+
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+
+  document.getElementById("msg").innerText =
+    "Relatório gerado. No Android será evoluído para PDF nativo/partilha.";
+}
+
+function sincronizarSheets(){
+  const dados = recolherDados();
+
+  /*
+    Aqui vamos colocar depois o URL do Google Apps Script:
+    fetch("URL_DO_APPS_SCRIPT", {
+      method:"POST",
+      body: JSON.stringify(dados)
+    })
+  */
+
+  console.log("Dados para Google Sheets:", dados);
+
+  document.getElementById("msg").innerText =
+    "Pronto para enviar para Google Sheets. Falta ligar o Apps Script.";
+  alert("Na próxima fase ligamos ao Google Sheets/Drive.");
+}
+</script>
 
 </body>
 </html>
