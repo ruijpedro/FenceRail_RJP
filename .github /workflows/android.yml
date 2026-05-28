@@ -23,7 +23,7 @@ steps:
   - name: Build APK
     run: |
       cd android
-      gradle assembleDebug
+    ./gradlew assembleDebug
 
   - name: Upload APK
     uses: actions/upload-artifact@v4
