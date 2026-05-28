@@ -1,8 +1,0 @@
-{
-  "appId": "pt.rjp.fencerail",
-  "appName": "FenceRail_RJP",
-  "webDir": "dist",
-  "server": {
-    "androidScheme": "https"
-  }
-}
