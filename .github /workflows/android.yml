@@ -31,4 +31,3 @@ steps:
     with:
       name: FenceRail_RJP_APK
       path: android/app/build/outputs/apk/debug/*.apk
-```
