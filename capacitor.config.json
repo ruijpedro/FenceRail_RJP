@@ -1,0 +1,6 @@
+{
+  "appId": "com.rjp.fencerail",
+  "appName": "FenceRail_RJP",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
