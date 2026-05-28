@@ -1,12 +1,281 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <title>FenceRail_RJP</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:#f2f4f7;
+      color:#222;
+    }
+
+    .topbar{
+      background:#1d3557;
+      color:white;
+      padding:20px;
+      font-size:32px;
+      font-weight:bold;
+      text-align:center;
+      box-shadow:0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .subtitle{
+      text-align:center;
+      padding:10px;
+      font-size:16px;
+      color:#555;
+    }
+
+    .container{
+      padding:20px;
+    }
+
+    .card{
+      background:white;
+      border-radius:16px;
+      padding:20px;
+      margin-bottom:20px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .section-title{
+      font-size:22px;
+      font-weight:bold;
+      margin-bottom:15px;
+      color:#1d3557;
+    }
+
+    .btn{
+      display:block;
+      width:100%;
+      padding:18px;
+      margin-top:12px;
+      border:none;
+      border-radius:14px;
+      font-size:18px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.2s;
+    }
+
+    .btn-primary{
+      background:#1d3557;
+      color:white;
+    }
+
+    .btn-primary:hover{
+      background:#163047;
+    }
+
+    .btn-secondary{
+      background:#457b9d;
+      color:white;
+    }
+
+    .btn-secondary:hover{
+      background:#376581;
+    }
+
+    .field{
+      margin-bottom:15px;
+    }
+
+    .field label{
+      display:block;
+      margin-bottom:6px;
+      font-weight:bold;
+    }
+
+    .field input,
+    .field select,
+    .field textarea{
+      width:100%;
+      padding:12px;
+      border-radius:10px;
+      border:1px solid #ccc;
+      font-size:16px;
+      box-sizing:border-box;
+    }
+
+    textarea{
+      min-height:100px;
+      resize:vertical;
+    }
+
+    .footer{
+      text-align:center;
+      padding:25px;
+      color:#666;
+      font-size:14px;
+    }
+
+    .status{
+      padding:10px;
+      border-radius:10px;
+      font-weight:bold;
+      text-align:center;
+      margin-top:10px;
+    }
+
+    .bom{
+      background:#c8f7c5;
+      color:#1b5e20;
+    }
+
+    .razoavel{
+      background:#fff3bf;
+      color:#8d6e00;
+    }
+
+    .mau{
+      background:#ffd6a5;
+      color:#b85c00;
+    }
+
+    .critico{
+      background:#ffb3b3;
+      color:#8b0000;
+    }
+
+  </style>
 </head>
+
 <body>
-  <h1>FenceRail_RJP</h1>
-  <p>Aplicação de cadastro e inspeção de vedações ferroviárias.</p>
+
+  <div class="topbar">
+    FenceRail_RJP
+  </div>
+
+  <div class="subtitle">
+    Cadastro e inspeção de vedações ferroviárias
+  </div>
+
+  <div class="container">
+
+    <div class="card">
+
+      <div class="section-title">
+        Novo Cadastro
+      </div>
+
+      <div class="field">
+        <label>Linha</label>
+        <input type="text" placeholder="Ex: Linha do Oeste">
+      </div>
+
+      <div class="field">
+        <label>PK Inicial</label>
+        <input type="text" placeholder="Ex: 121+450">
+      </div>
+
+      <div class="field">
+        <label>PK Final</label>
+        <input type="text" placeholder="Ex: 121+700">
+      </div>
+
+      <div class="field">
+        <label>Tipo de Vedação</label>
+        <select>
+          <option>Rede Metálica</option>
+          <option>Painel Rígido</option>
+          <option>Muro</option>
+          <option>Portão</option>
+          <option>Barreira</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Estado de Conservação</label>
+        <select id="estado" onchange="mudarEstado()">
+          <option>Bom</option>
+          <option>Razoável</option>
+          <option>Mau</option>
+          <option>Crítico</option>
+        </select>
+      </div>
+
+      <div id="estadoBox" class="status bom">
+        Estado Bom
+      </div>
+
+      <div class="field">
+        <label>Observações</label>
+        <textarea placeholder="Descreve a anomalia ou observações técnicas"></textarea>
+      </div>
+
+      <button class="btn btn-primary">
+        Guardar Cadastro
+      </button>
+
+      <button class="btn btn-secondary">
+        Marcar GPS Início
+      </button>
+
+      <button class="btn btn-secondary">
+        Marcar GPS Fim
+      </button>
+
+    </div>
+
+    <div class="card">
+
+      <div class="section-title">
+        Relatórios
+      </div>
+
+      <button class="btn btn-primary">
+        Exportar PDF
+      </button>
+
+      <button class="btn btn-primary">
+        Exportar Excel
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="footer">
+    FenceRail_RJP • Ambiente Ferroviário
+  </div>
+
+  <script>
+
+    function mudarEstado(){
+
+      let estado =
+        document.getElementById("estado").value;
+
+      let box =
+        document.getElementById("estadoBox");
+
+      box.className = "status";
+
+      if(estado === "Bom"){
+        box.classList.add("bom");
+      }
+
+      if(estado === "Razoável"){
+        box.classList.add("razoavel");
+      }
+
+      if(estado === "Mau"){
+        box.classList.add("mau");
+      }
+
+      if(estado === "Crítico"){
+        box.classList.add("critico");
+      }
+
+      box.innerHTML = "Estado " + estado;
+    }
+
+  </script>
+
 </body>
 </html>
