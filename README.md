@@ -10,3 +10,4 @@ Funcionalidades:
 - Ação corretiva/manutenção sem número
 - Exportação Excel e PDF
 - Preparada para APK via GitHub Actions
+- 
