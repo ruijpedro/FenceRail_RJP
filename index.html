@@ -1,1 +1,557 @@
-<!doctype html><html lang="pt"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>FenceRail_RJP</title></head><body><div id="root"></div><script type="module" src="/src/main.jsx"></script></body></html>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>FenceRail_RJP</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial, Helvetica, sans-serif;
+  background:#eef2f7;
+  color:#102033;
+}
+
+.topo{
+  background:linear-gradient(135deg,#002d5e,#004f9f);
+  color:white;
+  padding:22px;
+  border-bottom-left-radius:28px;
+  border-bottom-right-radius:28px;
+  box-shadow:0 4px 12px rgba(0,0,0,.25);
+}
+
+.topo-flex{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.logo{
+  width:92px;
+  height:92px;
+  border-radius:18px;
+  background:white;
+  object-fit:cover;
+}
+
+.topo-texto h1{
+  font-size:26px;
+  font-weight:900;
+}
+
+.topo-texto p{
+  margin-top:6px;
+  font-size:15px;
+  opacity:.95;
+}
+
+.container{
+  padding:18px;
+}
+
+.card{
+  background:white;
+  border-radius:24px;
+  padding:20px;
+  margin-bottom:18px;
+  box-shadow:0 4px 14px rgba(0,0,0,.10);
+}
+
+.center{
+  text-align:center;
+}
+
+.logo-central{
+  width:180px;
+  margin-bottom:18px;
+}
+
+.titulo{
+  font-size:30px;
+  font-weight:900;
+  color:#003b73;
+}
+
+.subtitulo{
+  margin-top:8px;
+  font-size:18px;
+  color:#304050;
+}
+
+.menu-btn{
+  width:100%;
+  background:white;
+  border:none;
+  border-radius:18px;
+  padding:18px;
+  margin-top:14px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:20px;
+  font-weight:800;
+  color:#003b73;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.menu-btn span{
+  font-size:28px;
+}
+
+.section-title{
+  font-size:22px;
+  font-weight:900;
+  margin-bottom:16px;
+  color:#003b73;
+}
+
+label{
+  display:block;
+  margin-top:14px;
+  margin-bottom:6px;
+  font-weight:700;
+}
+
+input, select, textarea{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:1px solid #c8d3df;
+  font-size:15px;
+}
+
+textarea{
+  min-height:90px;
+}
+
+.btn{
+  width:100%;
+  border:none;
+  border-radius:16px;
+  padding:16px;
+  margin-top:16px;
+  font-size:16px;
+  font-weight:900;
+  color:white;
+}
+
+.azul{
+  background:#0057a3;
+}
+
+.verde{
+  background:#168039;
+}
+
+.escuro{
+  background:#102033;
+}
+
+.estado{
+  margin-top:14px;
+  padding:12px;
+  border-radius:14px;
+  text-align:center;
+  font-weight:900;
+}
+
+.bom{
+  background:#d8f5df;
+  color:#166534;
+}
+
+.razoavel{
+  background:#fff3c4;
+  color:#8a6200;
+}
+
+.mau{
+  background:#ffd8a8;
+  color:#a34700;
+}
+
+.critico{
+  background:#ffc9c9;
+  color:#8b0000;
+}
+
+.footer{
+  margin-top:24px;
+  background:#002d5e;
+  color:white;
+  padding:18px;
+  border-top-left-radius:22px;
+  border-top-right-radius:22px;
+}
+
+.footer h3{
+  font-size:26px;
+}
+
+.footer p{
+  margin-top:4px;
+  opacity:.9;
+}
+
+.small{
+  margin-top:8px;
+  color:#607080;
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="topo">
+  <div class="topo-flex">
+
+    <img
+      class="logo"
+      src="https://i.imgur.com/tkS1lqR.png"
+    >
+
+    <div class="topo-texto">
+      <h1>INSPEÇÃO DE VEDAÇÕES</h1>
+      <p>Manutenção Ferroviária</p>
+      <p>Autor: RJP</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="card center">
+
+    <img
+      class="logo-central"
+      src="https://i.imgur.com/tkS1lqR.png"
+    >
+
+    <div class="titulo">
+      Inspeção de Vedações
+    </div>
+
+    <div class="subtitulo">
+      Inspeção e Cadastro de Vedações
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="section-title">
+      Dados da Vedação
+    </div>
+
+    <label>Linha</label>
+    <input id="linha">
+
+    <label>Troço</label>
+    <input id="troco">
+
+    <label>PK Inicial</label>
+    <input id="pkIni">
+
+    <label>PK Final</label>
+    <input id="pkFim">
+
+    <label>Lado</label>
+    <select id="lado">
+      <option>Esquerdo</option>
+      <option>Direito</option>
+      <option>Ambos</option>
+    </select>
+
+    <label>Tipo segundo Norma</label>
+    <select id="tipoNorma">
+      <option>Vedação Plena Via Zona Urbana</option>
+      <option>Vedação Plena Via Zona Rural</option>
+      <option>Vedação Estações/Apeadeiros</option>
+      <option>Outro</option>
+    </select>
+
+    <label>Tipologia</label>
+    <select id="tipologia">
+      <option>Rede Electrossoldada</option>
+      <option>Muro em Betão</option>
+      <option>Muro Betão Confinante</option>
+      <option>Painel de Rede Electrozincada</option>
+      <option>Rede Simples Torção</option>
+      <option>Portão</option>
+    </select>
+
+    <label>Estado de Conservação</label>
+    <select id="estado" onchange="estadoCor()">
+      <option>Bom</option>
+      <option>Razoável</option>
+      <option>Mau</option>
+      <option>Crítico</option>
+    </select>
+
+    <div id="estadoBox" class="estado bom">
+      Estado Bom
+    </div>
+
+    <label>Observações</label>
+    <textarea id="obs"></textarea>
+
+    <label>Ação de Manutenção</label>
+    <textarea id="acao"></textarea>
+
+    <button class="btn azul" onclick="gpsInicio()">
+      Marcar GPS Início
+    </button>
+
+    <div class="small" id="gps1">
+      GPS início não registado
+    </div>
+
+    <button class="btn azul" onclick="gpsFim()">
+      Marcar GPS Fim
+    </button>
+
+    <div class="small" id="gps2">
+      GPS fim não registado
+    </div>
+
+    <button class="btn verde" onclick="guardarLocal()">
+      Guardar na APP
+    </button>
+
+    <button class="btn azul" onclick="sincronizarSheets()">
+      Adicionar à folha de cadastro
+    </button>
+
+    <button class="btn escuro" onclick="gerarPDF()">
+      Gerar PDF / Partilhar
+    </button>
+
+    <div class="small" id="msg">
+      Sem sincronização efetuada.
+    </div>
+
+  </div>
+
+</div>
+
+<div class="footer">
+  <h3>Vedações</h3>
+  <p>Ambiente Ferroviário</p>
+</div>
+
+<script>
+
+let gpsInicioValor = "";
+let gpsFimValor = "";
+
+function estadoCor(){
+
+  const estado = document.getElementById("estado").value;
+  const box = document.getElementById("estadoBox");
+
+  box.className = "estado";
+
+  if(estado === "Bom"){
+    box.classList.add("bom");
+  }
+
+  if(estado === "Razoável"){
+    box.classList.add("razoavel");
+  }
+
+  if(estado === "Mau"){
+    box.classList.add("mau");
+  }
+
+  if(estado === "Crítico"){
+    box.classList.add("critico");
+  }
+
+  box.innerHTML = "Estado " + estado;
+}
+
+function gpsInicio(){
+
+  navigator.geolocation.getCurrentPosition(function(pos){
+
+    gpsInicioValor =
+      pos.coords.latitude + "," +
+      pos.coords.longitude;
+
+    document.getElementById("gps1").innerHTML =
+      gpsInicioValor;
+
+  });
+}
+
+function gpsFim(){
+
+  navigator.geolocation.getCurrentPosition(function(pos){
+
+    gpsFimValor =
+      pos.coords.latitude + "," +
+      pos.coords.longitude;
+
+    document.getElementById("gps2").innerHTML =
+      gpsFimValor;
+
+  });
+}
+
+function recolherDados(){
+
+  return {
+
+    linha:
+      document.getElementById("linha").value,
+
+    troco:
+      document.getElementById("troco").value,
+
+    pkIni:
+      document.getElementById("pkIni").value,
+
+    pkFim:
+      document.getElementById("pkFim").value,
+
+    lado:
+      document.getElementById("lado").value,
+
+    tipoNorma:
+      document.getElementById("tipoNorma").value,
+
+    tipologia:
+      document.getElementById("tipologia").value,
+
+    estado:
+      document.getElementById("estado").value,
+
+    obs:
+      document.getElementById("obs").value,
+
+    acao:
+      document.getElementById("acao").value,
+
+    gpsInicio:
+      gpsInicioValor,
+
+    gpsFim:
+      gpsFimValor
+  };
+}
+
+function guardarLocal(){
+
+  const dados = recolherDados();
+
+  let lista =
+    JSON.parse(
+      localStorage.getItem("fencerail")
+      || "[]"
+    );
+
+  lista.push(dados);
+
+  localStorage.setItem(
+    "fencerail",
+    JSON.stringify(lista)
+  );
+
+  alert("Inspeção guardada.");
+}
+
+function sincronizarSheets(){
+
+  const dados = recolherDados();
+
+  fetch(
+  "https://script.google.com/macros/s/AKfycbxHx9K71Qh5L98uFSCNGQIV7R_zMSyfqpQcJ2mx5hbKOyW3n3O0cW1IDoJ3ftDx_wtV/exec",
+  {
+    method:"POST",
+    mode:"no-cors",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify(dados)
+  });
+
+  document.getElementById("msg").innerHTML =
+    "Inspeção enviada para Google Sheets.";
+
+  alert("Inspeção sincronizada.");
+}
+
+function gerarPDF(){
+
+  const d = recolherDados();
+
+  const texto = `
+INSPEÇÃO DE VEDAÇÕES
+
+Linha: ${d.linha}
+Troço: ${d.troco}
+
+PK Inicial: ${d.pkIni}
+PK Final: ${d.pkFim}
+
+Lado: ${d.lado}
+
+Tipo Norma:
+${d.tipoNorma}
+
+Tipologia:
+${d.tipologia}
+
+Estado:
+${d.estado}
+
+Observações:
+${d.obs}
+
+Ação:
+${d.acao}
+
+GPS Início:
+${d.gpsInicio}
+
+GPS Fim:
+${d.gpsFim}
+`;
+
+  const blob =
+    new Blob(
+      [texto],
+      {type:"text/plain"}
+    );
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const a =
+    document.createElement("a");
+
+  a.href = url;
+
+  a.download =
+    "Inspecao_Vedacoes.txt";
+
+  a.click();
+
+  URL.revokeObjectURL(url);
+
+  alert("Relatório gerado.");
+}
+</script>
+
+</body>
+</html>
