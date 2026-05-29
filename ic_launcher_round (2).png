@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FenceRail_RJP</title>
+<style>
+:root{--azul:#002d5e;--azul2:#004f9f;--texto:#102033;--claro:#eef2f7;--card:#fff}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--claro);color:var(--texto)}
+.topo{background:linear-gradient(135deg,var(--azul),var(--azul2));color:white;padding:22px;border-bottom-left-radius:28px;border-bottom-right-radius:28px;box-shadow:0 5px 16px rgba(0,0,0,.22);position:relative;overflow:hidden}
+.topo:after{content:"";position:absolute;right:-30px;bottom:0;width:54%;height:100%;background:linear-gradient(90deg,rgba(0,45,94,0),rgba(255,255,255,.08));opacity:.65}
+.topo-flex{display:flex;align-items:center;gap:16px;position:relative;z-index:1}.logo{width:92px;height:92px;border-radius:18px;background:white;object-fit:cover;box-shadow:0 3px 12px rgba(0,0,0,.20)}
+h1{font-size:25px;margin:0;font-weight:900;letter-spacing:.3px}.topo p{margin:6px 0 0 0;font-size:16px}.rjp{color:#83cfff;font-weight:900}.container{padding:18px 18px 92px}
+.card{background:var(--card);border-radius:24px;padding:20px;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.10)}.center{text-align:center}.logo-central{width:184px;max-width:70%;margin-bottom:16px;border-radius:20px}.titulo{font-size:30px;font-weight:900;color:#003b73}.subtitulo{margin-top:8px;font-size:18px;color:#304050}.decor{display:flex;align-items:center;justify-content:center;gap:9px;margin:12px auto 3px}.decor span{height:3px;width:78px;background:#7ec8ff;border-radius:8px}.decor i{width:10px;height:10px;background:#7ec8ff;border-radius:50%;display:block}.section-title{font-size:22px;font-weight:900;margin-bottom:16px;color:#003b73}.menu-btn{width:100%;background:white;border:0;border-radius:18px;padding:18px;margin-top:14px;display:flex;align-items:center;justify-content:space-between;font-size:21px;font-weight:900;color:#003b73;box-shadow:0 4px 12px rgba(0,0,0,.08)}.menu-left{display:flex;align-items:center;gap:16px}.menu-icon{width:54px;height:54px;border-radius:14px;background:#eef5ff;display:flex;align-items:center;justify-content:center;font-size:28px}.arrow{font-size:34px}label{display:block;margin-top:14px;margin-bottom:6px;font-weight:700}input,select,textarea{width:100%;padding:14px;border-radius:14px;border:1px solid #c8d3df;font-size:15px;background:white}textarea{min-height:90px}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.btn{width:100%;border:none;border-radius:16px;padding:16px;margin-top:16px;font-size:16px;font-weight:900;color:white}.azul{background:#0057a3}.verde{background:#168039}.escuro{background:#102033}.laranja{background:#d97706}.cinza{background:#607080}.estado{margin-top:14px;padding:12px;border-radius:14px;text-align:center;font-weight:900}.bom{background:#d8f5df;color:#166534}.razoavel{background:#fff3c4;color:#8a6200}.mau{background:#ffd8a8;color:#a34700}.critico{background:#ffc9c9;color:#8b0000}.small{margin-top:8px;color:#607080;font-size:13px;line-height:1.4}.footer-card{background:linear-gradient(135deg,var(--azul),var(--azul2));color:white;padding:18px;border-radius:22px;margin-top:18px;display:flex;align-items:center;justify-content:space-between}.footer-card h3{font-size:26px;margin:0}.footer-card p{margin:4px 0 0 0}.footer-icon{height:56px;width:56px;border-radius:50%;border:1px solid rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center;font-size:30px}.mini-logo{width:64px;height:64px;border-radius:12px;object-fit:cover}.bottom-nav{position:fixed;left:0;right:0;bottom:0;background:white;display:flex;justify-content:space-around;padding:10px 0 8px;box-shadow:0 -4px 16px rgba(0,0,0,.12);z-index:10;border-top-left-radius:18px;border-top-right-radius:18px}.nav-item{text-align:center;font-size:12px;color:#203040;font-weight:700}.nav-item div{font-size:25px;margin-bottom:2px}.nav-item.active{color:#003b73}.page{display:none}.page.active{display:block}.pill{display:inline-block;background:#eef5ff;color:#003b73;padding:7px 10px;border-radius:999px;font-size:13px;font-weight:800;margin:3px 3px 0 0}@media(max-width:420px){h1{font-size:21px}.logo{width:82px;height:82px}.titulo{font-size:26px}.menu-btn{font-size:18px}.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="topo">
+  <div class="topo-flex">
+    <img class="logo" src="rjp_icon.png" alt="RJP">
+    <div>
+      <h1>INSPEÇÃO DE VEDAÇÕES</h1>
+      <p>Manutenção Ferroviária</p>
+      <p>Autor: <span class="rjp">RJP</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<section id="pageInicio" class="page active">
+  <div class="card center">
+    <img class="logo-central" src="rjp_icon.png" alt="RJP">
+    <div class="titulo">Inspeção de Vedações</div>
+    <div class="decor"><span></span><i></i><span></span></div>
+    <div class="subtitulo">Inspeção e Cadastro de Vedações</div>
+  </div>
+
+  <button class="menu-btn" onclick="abrirFormulario('cadastro')"><span class="menu-left"><span class="menu-icon">📋</span>Novo Cadastro</span><span class="arrow">›</span></button>
+  <button class="menu-btn" onclick="abrirFormulario('inspecao')"><span class="menu-left"><span class="menu-icon">🔎</span>Nova Inspeção</span><span class="arrow">›</span></button>
+  <button class="menu-btn" onclick="abrirPagina('pageRelatorios')"><span class="menu-left"><span class="menu-icon">📊</span>Relatórios</span><span class="arrow">›</span></button>
+  <button class="menu-btn" onclick="abrirPagina('pageMapa')"><span class="menu-left"><span class="menu-icon">📍</span>Mapa</span><span class="arrow">›</span></button>
+  <button class="menu-btn" onclick="exportarExcel()"><span class="menu-left"><span class="menu-icon">📄</span>Exportar Excel</span><span class="arrow">›</span></button>
+  <button class="menu-btn" onclick="sincronizarSheets()"><span class="menu-left"><span class="menu-icon">☁️</span>Sincronizar Drive</span><span class="arrow">›</span></button>
+
+  <div class="footer-card">
+    <div class="footer-icon">🚆</div>
+    <div style="flex:1;margin-left:14px"><h3>Vedações</h3><p>Ambiente Ferroviário</p></div>
+    <img class="mini-logo" src="rjp_icon.png" alt="RJP">
+  </div>
+</section>
+
+<section id="pageFormulario" class="page">
+  <div class="card">
+    <div class="section-title" id="formTitulo">Novo Cadastro</div>
+
+    <label>Linha</label>
+    <input id="linha" placeholder="Ex: Linha do Oeste">
+
+    <label>Troço</label>
+    <input id="troco" placeholder="Ex: Meleças - Louriçal">
+
+    <div class="row">
+      <div><label>PK Inicial</label><input id="pkIni" placeholder="Ex: 21+204"></div>
+      <div><label>PK Final</label><input id="pkFim" placeholder="Ex: 21+262"></div>
+    </div>
+
+    <label>Lado</label>
+    <select id="lado"><option>Esquerdo</option><option>Direito</option><option>Ambos</option></select>
+
+    <div class="row">
+      <div><label>Altura</label><input id="altura" placeholder="Ex: 1,94"></div>
+      <div><label>Comprimento</label><input id="comprimento" placeholder="Ex: 58"></div>
+    </div>
+
+    <label>Tipo segundo Norma</label>
+    <select id="tipoNorma">
+      <option>Vedação Plena Via Zona Urbana</option>
+      <option>Vedação Plena Via Zona Rural</option>
+      <option>Vedação Estações/Apeadeiros</option>
+      <option>Outro / Cadastro Existente</option>
+    </select>
+
+    <label>Tipologia / Tipo</label>
+    <select id="tipologia">
+      <option>Rede Electrossoldada</option>
+      <option>Alvenaria Confinante</option>
+      <option>Muro em Betão</option>
+      <option>Muro em Betão Confinante</option>
+      <option>Painel de Rede Electrozincada</option>
+      <option>Muro em Betão e Rede</option>
+      <option>Rede Simples Torção</option>
+      <option>Portão</option>
+      <option>Rural - Rede 160/9/15</option>
+      <option>Urbana - Tipologia I</option>
+      <option>Urbana - Tipologia II</option>
+      <option>Outro</option>
+    </select>
+
+    <label>Estado de Conservação</label>
+    <select id="estado" onchange="estadoCor()"><option>Bom</option><option>Razoável</option><option>Mau</option><option>Crítico</option></select>
+    <div id="estadoBox" class="estado bom">Estado Bom</div>
+
+    <label>Observações</label>
+    <textarea id="obs" placeholder="Descreve anomalias, condicionantes e observações técnicas."></textarea>
+
+    <label>Ação de Manutenção</label>
+    <textarea id="acao" placeholder="Ex: Repor rede danificada; substituir postes; cortar vegetação."></textarea>
+
+    <label>Fotografias</label>
+    <input id="fotos" type="file" accept="image/*" multiple>
+    <div class="small">As fotos serão associadas ao relatório numa fase seguinte.</div>
+
+    <button class="btn azul" onclick="gpsInicio()">Marcar GPS Início</button>
+    <div class="small" id="gps1">GPS início não registado</div>
+    <button class="btn azul" onclick="gpsFim()">Marcar GPS Fim</button>
+    <div class="small" id="gps2">GPS fim não registado</div>
+
+    <button class="btn verde" onclick="guardarLocal()">Guardar na APP</button>
+    <button class="btn azul" onclick="sincronizarSheets()">Sincronizar</button>
+    <button class="btn laranja" onclick="gerarPdfDrive()">Gerar PDF / Guardar Drive / Partilhar</button>
+    <button class="btn cinza" onclick="abrirPagina('pageInicio')">Voltar ao Início</button>
+
+    <div class="small" id="msg">Sem sincronização efetuada.</div>
+  </div>
+</section>
+
+<section id="pageRelatorios" class="page">
+  <div class="card">
+    <div class="section-title">Relatórios</div>
+    <div id="resumoRelatorios" class="small"></div>
+    <button class="btn azul" onclick="atualizarResumo()">Atualizar Resumo</button>
+    <button class="btn escuro" onclick="exportarExcel()">Exportar CSV</button>
+  </div>
+</section>
+
+<section id="pageMapa" class="page">
+  <div class="card">
+    <div class="section-title">Mapa</div>
+    <p>Abre o último ponto GPS registado no Google Maps.</p>
+    <button class="btn azul" onclick="abrirMaps()">Abrir último GPS no Maps</button>
+  </div>
+</section>
+
+<section id="pageAlertas" class="page"><div class="card"><div class="section-title">Alertas</div><p>Alertas e ações pendentes serão ligados ao Google Sheets.</p><span class="pill">Urgente</span><span class="pill">Alta</span><span class="pill">Média</span></div></section>
+
+<section id="pageConfig" class="page">
+  <div class="card">
+    <div class="section-title">Configurações</div>
+    <label>URL Apps Script</label>
+    <textarea id="scriptUrlBox"></textarea>
+    <button class="btn escuro" onclick="guardarConfig()">Guardar Configuração</button>
+  </div>
+</section>
+
+</div>
+
+<div class="bottom-nav">
+  <div class="nav-item active" onclick="abrirPagina('pageInicio')"><div>🏠</div>Início</div>
+  <div class="nav-item" onclick="abrirFormulario('inspecao')"><div>📋</div>Inspeções</div>
+  <div class="nav-item" onclick="abrirPagina('pageRelatorios')"><div>📊</div>Relatórios</div>
+  <div class="nav-item" onclick="abrirPagina('pageAlertas')"><div>🔔</div>Alertas</div>
+  <div class="nav-item" onclick="abrirPagina('pageConfig')"><div>⚙️</div>Config.</div>
+</div>
+
+<script>
+let SCRIPT_URL = localStorage.getItem("fencerail_script_url") || "https://script.google.com/macros/s/AKfycbwfXqxd1vab0H7H0IUSYQQvO05W2qirTGGTP0AfctDBBSo5-V9GHgKDqdaBF3o4LANz/exec";
+let gpsInicioValor = "";
+let gpsFimValor = "";
+let ultimoPdfUrl = "";
+let modoAtual = "cadastro";
+document.getElementById("scriptUrlBox").value = SCRIPT_URL;
+
+function abrirPagina(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.querySelectorAll(".nav-item").forEach(n=>n.classList.remove("active"));
+  if(id==="pageInicio") document.querySelectorAll(".nav-item")[0].classList.add("active");
+  if(id==="pageFormulario") document.querySelectorAll(".nav-item")[1].classList.add("active");
+  if(id==="pageRelatorios") {document.querySelectorAll(".nav-item")[2].classList.add("active"); atualizarResumo();}
+  if(id==="pageAlertas") document.querySelectorAll(".nav-item")[3].classList.add("active");
+  if(id==="pageConfig") document.querySelectorAll(".nav-item")[4].classList.add("active");
+}
+function abrirFormulario(modo){
+  modoAtual = modo;
+  document.getElementById("formTitulo").innerHTML = modo === "cadastro" ? "Novo Cadastro" : "Nova Inspeção";
+  abrirPagina("pageFormulario");
+}
+function estadoCor(){
+  const estado=document.getElementById("estado").value;
+  const box=document.getElementById("estadoBox");
+  box.className="estado";
+  if(estado==="Bom") box.classList.add("bom");
+  if(estado==="Razoável") box.classList.add("razoavel");
+  if(estado==="Mau") box.classList.add("mau");
+  if(estado==="Crítico") box.classList.add("critico");
+  box.innerHTML="Estado "+estado;
+}
+function gpsInicio(){
+  if(!navigator.geolocation){alert("GPS não disponível.");return;}
+  navigator.geolocation.getCurrentPosition(pos=>{
+    gpsInicioValor=pos.coords.latitude.toFixed(6)+","+pos.coords.longitude.toFixed(6);
+    document.getElementById("gps1").innerHTML=gpsInicioValor;
+  },()=>alert("Não foi possível obter GPS."),{enableHighAccuracy:true,timeout:10000});
+}
+function gpsFim(){
+  if(!navigator.geolocation){alert("GPS não disponível.");return;}
+  navigator.geolocation.getCurrentPosition(pos=>{
+    gpsFimValor=pos.coords.latitude.toFixed(6)+","+pos.coords.longitude.toFixed(6);
+    document.getElementById("gps2").innerHTML=gpsFimValor;
+  },()=>alert("Não foi possível obter GPS."),{enableHighAccuracy:true,timeout:10000});
+}
+function valor(id){const el=document.getElementById(id);return el?el.value:"";}
+function recolherDados(){
+  return {modo:modoAtual,data:new Date().toLocaleString("pt-PT"),linha:valor("linha"),troco:valor("troco"),pkIni:valor("pkIni"),pkFim:valor("pkFim"),lado:valor("lado"),altura:valor("altura"),comprimento:valor("comprimento"),tipoNorma:valor("tipoNorma"),tipologia:valor("tipologia"),estado:valor("estado"),obs:valor("obs"),acao:valor("acao"),gpsInicio:gpsInicioValor,gpsFim:gpsFimValor};
+}
+function guardarLocal(){
+  const dados=recolherDados();
+  let lista=JSON.parse(localStorage.getItem("fencerail")||"[]");
+  lista.push(dados);
+  localStorage.setItem("fencerail",JSON.stringify(lista));
+  alert("Registo guardado na APP.");
+}
+function sincronizarSheets(){
+  const dados=recolherDados();
+  fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/json"},body:JSON.stringify(dados)});
+  document.getElementById("msg").innerHTML="Sincronização enviada para Google Sheets.";
+  alert("Sincronização enviada.");
+}
+function gerarPdfDrive(){
+  const dados=recolherDados();
+  fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain"},body:JSON.stringify(dados)})
+  .then(r=>r.json()).then(res=>{
+    if(res.status==="OK"){
+      ultimoPdfUrl=res.pdf;
+      document.getElementById("msg").innerHTML="PDF guardado no Google Drive.";
+      const texto="Inspeção de Vedações - FenceRail_RJP\n\nLinha: "+dados.linha+"\nTroço: "+dados.troco+"\nPK: "+dados.pkIni+" a "+dados.pkFim+"\n\nPDF: "+ultimoPdfUrl;
+      if(navigator.share){navigator.share({title:"Inspeção de Vedações",text:texto,url:ultimoPdfUrl});}
+      else{window.location.href="https://wa.me/?text="+encodeURIComponent(texto);}
+    }else{alert("Erro ao gerar PDF: "+res.erro);}
+  }).catch(err=>alert("Erro ao comunicar com Google Drive: "+err));
+}
+function exportarExcel(){
+  const lista=JSON.parse(localStorage.getItem("fencerail")||"[]");
+  let csv="Modo;Data;Linha;Troço;PK Inicial;PK Final;Lado;Altura;Comprimento;Tipo Norma;Tipologia;Estado;Observações;Ação;GPS Início;GPS Fim\n";
+  lista.forEach(d=>{csv+=`${d.modo||""};${d.data||""};${d.linha||""};${d.troco||""};${d.pkIni||""};${d.pkFim||""};${d.lado||""};${d.altura||""};${d.comprimento||""};${d.tipoNorma||""};${d.tipologia||""};${d.estado||""};${(d.obs||"").replace(/\n/g," ")};${(d.acao||"").replace(/\n/g," ")};${d.gpsInicio||""};${d.gpsFim||""}\n`;});
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");a.href=url;a.download="FenceRail_RJP_export.csv";a.click();URL.revokeObjectURL(url);
+}
+function atualizarResumo(){
+  const lista=JSON.parse(localStorage.getItem("fencerail")||"[]");
+  const estados={Bom:0,"Razoável":0,Mau:0,"Crítico":0};
+  lista.forEach(d=>{if(estados[d.estado]!==undefined) estados[d.estado]++;});
+  document.getElementById("resumoRelatorios").innerHTML="Registos locais: "+lista.length+"<br>Bom: "+estados.Bom+" | Razoável: "+estados["Razoável"]+" | Mau: "+estados.Mau+" | Crítico: "+estados["Crítico"];
+}
+function abrirMaps(){
+  if(!gpsInicioValor){alert("Ainda não existe GPS registado.");return;}
+  window.location.href="https://www.google.com/maps?q="+encodeURIComponent(gpsInicioValor);
+}
+function guardarConfig(){
+  SCRIPT_URL=document.getElementById("scriptUrlBox").value.trim();
+  localStorage.setItem("fencerail_script_url",SCRIPT_URL);
+  alert("Configuração guardada.");
+}
+</script>
+</body>
+</html>
