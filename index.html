@@ -4,17 +4,18 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>FenceRail_RJP</title>
+
 <style>
 body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#eef2f7;color:#102033}
 .topo{background:linear-gradient(135deg,#002d5e,#004f9f);color:white;padding:22px;border-bottom-left-radius:28px;border-bottom-right-radius:28px}
 .topo-flex{display:flex;align-items:center;gap:16px}
-.logo{width:92px;height:92px;border-radius:18px;background:white;object-fit:cover}
+.logo{width:150px;height:92px;border-radius:18px;background:white;object-fit:contain;padding:8px}
 h1{font-size:26px;margin:0;font-weight:900}
 .topo p{margin:6px 0 0 0}
 .container{padding:18px}
 .card{background:white;border-radius:24px;padding:20px;margin-bottom:18px;box-shadow:0 4px 14px rgba(0,0,0,.10)}
 .center{text-align:center}
-.logo-central{width:180px;margin-bottom:18px}
+.logo-central{width:180px;margin-bottom:18px;border-radius:24px;object-fit:contain}
 .titulo{font-size:30px;font-weight:900;color:#003b73}
 .subtitulo{margin-top:8px;font-size:18px;color:#304050}
 .section-title{font-size:22px;font-weight:900;margin-bottom:16px;color:#003b73}
@@ -30,15 +31,16 @@ textarea{min-height:90px}
 .footer h3{font-size:26px;margin:0}.footer p{margin:4px 0 0 0}
 </style>
 </head>
+
 <body>
 
 <div class="topo">
   <div class="topo-flex">
-    <img class="logo" src="./ip_logo.png" alt="Infraestruturas de Portugal">
+    <img class="logo" src="ip_logo.png" alt="Infraestruturas de Portugal">
     <div>
       <h1>INSPEÇÃO DE VEDAÇÕES</h1>
       <p>Manutenção Ferroviária</p>
-      <p>Autor: RJP</p>
+      <p>Autor: <b style="color:#83cfff">RJP</b></p>
     </div>
   </div>
 </div>
@@ -46,7 +48,7 @@ textarea{min-height:90px}
 <div class="container">
 
 <div class="card center">
- <img class="logo-central" src="./rjp_icon.png" alt="RJP">
+  <img class="logo-central" src="rjp_icon.png" alt="RJP">
   <div class="titulo">Inspeção de Vedações</div>
   <div class="subtitulo">Inspeção e Cadastro de Vedações</div>
 </div>
@@ -129,7 +131,7 @@ textarea{min-height:90px}
 
 <div class="footer">
   <h3>Vedações</h3>
-  <p>Ambiente Ferroviário</p>
+  <p>Ambiente Ferroviário · Infraestruturas de Portugal · RJP</p>
 </div>
 
 <script>
@@ -151,17 +153,57 @@ function estadoCor(){
 }
 
 function gpsInicio(){
-  navigator.geolocation.getCurrentPosition(function(pos){
-    gpsInicioValor = pos.coords.latitude + "," + pos.coords.longitude;
-    document.getElementById("gps1").innerHTML = gpsInicioValor;
-  }, function(){ alert("Não foi possível obter GPS."); });
+  if(!navigator.geolocation){
+    alert("GPS não disponível neste dispositivo.");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    function(pos){
+      gpsInicioValor =
+        pos.coords.latitude + "," +
+        pos.coords.longitude;
+
+      document.getElementById("gps1").innerHTML =
+        "GPS início: " + gpsInicioValor +
+        " | Precisão: " + Math.round(pos.coords.accuracy) + " m";
+    },
+    function(){
+      alert("Não foi possível obter GPS. Verifica permissões de localização.");
+    },
+    {
+      enableHighAccuracy:true,
+      timeout:15000,
+      maximumAge:0
+    }
+  );
 }
 
 function gpsFim(){
-  navigator.geolocation.getCurrentPosition(function(pos){
-    gpsFimValor = pos.coords.latitude + "," + pos.coords.longitude;
-    document.getElementById("gps2").innerHTML = gpsFimValor;
-  }, function(){ alert("Não foi possível obter GPS."); });
+  if(!navigator.geolocation){
+    alert("GPS não disponível neste dispositivo.");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    function(pos){
+      gpsFimValor =
+        pos.coords.latitude + "," +
+        pos.coords.longitude;
+
+      document.getElementById("gps2").innerHTML =
+        "GPS fim: " + gpsFimValor +
+        " | Precisão: " + Math.round(pos.coords.accuracy) + " m";
+    },
+    function(){
+      alert("Não foi possível obter GPS. Verifica permissões de localização.");
+    },
+    {
+      enableHighAccuracy:true,
+      timeout:15000,
+      maximumAge:0
+    }
+  );
 }
 
 function recolherDados(){
@@ -183,9 +225,19 @@ function recolherDados(){
 
 function guardarLocal(){
   const dados = recolherDados();
-  let lista = JSON.parse(localStorage.getItem("fencerail") || "[]");
+
+  let lista =
+    JSON.parse(
+      localStorage.getItem("fencerail") || "[]"
+    );
+
   lista.push(dados);
-  localStorage.setItem("fencerail", JSON.stringify(lista));
+
+  localStorage.setItem(
+    "fencerail",
+    JSON.stringify(lista)
+  );
+
   alert("Inspeção guardada na APP.");
 }
 
@@ -199,7 +251,9 @@ function sincronizarSheets(){
     body: JSON.stringify(dados)
   });
 
-  document.getElementById("msg").innerHTML = "Sincronização enviada para Google Sheets.";
+  document.getElementById("msg").innerHTML =
+    "Sincronização enviada para Google Sheets.";
+
   alert("Sincronização enviada.");
 }
 
@@ -214,14 +268,19 @@ function gerarPdfDrive(){
   .then(r => r.json())
   .then(res => {
     if(res.status === "OK"){
+
       ultimoPdfUrl = res.pdf;
-      document.getElementById("msg").innerHTML = "PDF guardado no Google Drive.";
+
+      document.getElementById("msg").innerHTML =
+        "PDF guardado no Google Drive.";
 
       const texto =
         "Inspeção de Vedações - FenceRail_RJP\n\n" +
         "Linha: " + dados.linha + "\n" +
         "Troço: " + dados.troco + "\n" +
-        "PK: " + dados.pkIni + " a " + dados.pkFim + "\n\n" +
+        "PK: " + dados.pkIni + " a " + dados.pkFim + "\n" +
+        "GPS Início: " + dados.gpsInicio + "\n" +
+        "GPS Fim: " + dados.gpsFim + "\n\n" +
         "PDF: " + ultimoPdfUrl;
 
       if(navigator.share){
