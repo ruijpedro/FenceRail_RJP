@@ -2,5 +2,12 @@
   "appId": "com.rjp.fencerail",
   "appName": "FenceRail_RJP",
   "webDir": "dist",
-  "bundledWebRuntime": false
+  "bundledWebRuntime": false,
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1200,
+      "backgroundColor": "#002d5e",
+      "showSpinner": false
+    }
+  }
 }
