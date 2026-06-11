@@ -8,7 +8,7 @@ import ipLogo from './main/assets/ip_logo.png';
 import rjpIcon from './main/assets/rjp_icon.png';
 
 function App(){
-  const [registos,setRegistos]=useState(JSON.parse(localStorage.getItem('fencerail_registos')||'[]'));
+  const [registos,setRegistos]=useState(JSON.parse(localStorage.getItem('vedacoes_registos')||'[]'));
 
   const [form,setForm]=useState({
     linha:'',
@@ -27,7 +27,7 @@ function App(){
 
   const guardar=(lista)=>{
     setRegistos(lista);
-    localStorage.setItem('fencerail_registos',JSON.stringify(lista));
+    localStorage.setItem('vedacoes_registos',JSON.stringify(lista));
   };
 
   const getGps=async(campo)=>{
@@ -67,18 +67,24 @@ function App(){
     });
   };
 
+  const atualizar=()=>{
+    const lista=JSON.parse(localStorage.getItem('vedacoes_registos')||'[]');
+    setRegistos(lista);
+    alert('Dados atualizados na APP/WebApp.');
+  };
+
   const exportarExcel=()=>{
     const ws=XLSX.utils.json_to_sheet(registos);
     const wb=XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb,ws,'Cadastro');
-    XLSX.writeFile(wb,'FenceRail_RJP_cadastro.xlsx');
+    XLSX.writeFile(wb,'Vedacoes_cadastro.xlsx');
   };
 
   const exportarPDF=()=>{
     const pdf=new jsPDF();
 
     pdf.setFontSize(18);
-    pdf.text('FenceRail_RJP - Cadastro de Vedações',14,18);
+    pdf.text('Vedações - Cadastro de Vedações',14,18);
 
     pdf.setFontSize(10);
 
@@ -103,7 +109,7 @@ function App(){
       y+=9;
     });
 
-    pdf.save('FenceRail_RJP_relatorio.pdf');
+    pdf.save('Vedacoes_relatorio.pdf');
   };
 
   const stats=useMemo(
@@ -252,6 +258,10 @@ function App(){
               <span key={k}>{k}: {v}</span>
             )}
           </div>
+
+          <button onClick={atualizar}>
+            Atualizar
+          </button>
 
           <button onClick={exportarExcel}>
             Exportar Excel

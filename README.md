@@ -1,13 +1,19 @@
-# FenceRail_RJP
+# Vedações
 
-Aplicação Android/PWA para inspeção, cadastro e aferição de vedações ferroviárias.
+App IP/RJP para cadastro e inspeção de vedações ferroviárias.
 
-Funcionalidades:
-- GPS início/fim de troço
-- Estado de conservação
-- Tipo de vedação
-- Observações
-- Ação corretiva/manutenção sem número
-- Exportação Excel e PDF
-- Preparada para APK via GitHub Actions
-- 
+## Alterações aplicadas
+- Nome da app alterado para **Vedações**.
+- `appId`/package Android atualizado para `com.rjp.vedacoes`.
+- Ícone Android atualizado a partir do pacote `ic_launcher`.
+- WebApp e APK alinhadas visualmente com a linha EDF_Oeste / EBTCC.
+- Botões de sincronização, PDF/Drive/partilha e GPS mantidos.
+
+## Build
+```bash
+npm install
+npm run build
+npx cap sync android
+cd android
+gradle assembleDebug
+```

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>FenceRail_RJP</title>
+<title>Vedações</title>
 
 <style>
 body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#eef2f7;color:#102033}
@@ -48,7 +48,7 @@ textarea{min-height:90px}
 <div class="container">
 
 <div class="card center">
-  <img class="logo-central" src="src/main/assets/rjp_icon.png.png" alt="RJP">
+  <img class="logo-central" src="src/main/assets/rjp_icon.png" alt="RJP">
   <div class="titulo">Inspeção de Vedações</div>
   <div class="subtitulo">Inspeção e Cadastro de Vedações</div>
 </div>
@@ -121,6 +121,8 @@ textarea{min-height:90px}
   <button class="btn verde" onclick="guardarLocal()">Guardar na APP</button>
 
   <button class="btn azul" onclick="sincronizarSheets()">Sincronizar</button>
+
+  <button class="btn escuro" onclick="atualizarDados()">Atualizar</button>
 
   <button class="btn laranja" onclick="gerarPdfDrive()">Gerar PDF / Guardar Drive / Partilhar</button>
 
@@ -228,17 +230,21 @@ function guardarLocal(){
 
   let lista =
     JSON.parse(
-      localStorage.getItem("fencerail") || "[]"
+      localStorage.getItem("vedacoes") || "[]"
     );
 
   lista.push(dados);
 
   localStorage.setItem(
-    "fencerail",
+    "vedacoes",
     JSON.stringify(lista)
   );
 
   alert("Inspeção guardada na APP.");
+}
+
+function atualizarDados(){
+  location.reload();
 }
 
 function sincronizarSheets(){
@@ -275,7 +281,7 @@ function gerarPdfDrive(){
         "PDF guardado no Google Drive.";
 
       const texto =
-        "Inspeção de Vedações - FenceRail_RJP\n\n" +
+        "Inspeção de Vedações - Vedações\n\n" +
         "Linha: " + dados.linha + "\n" +
         "Troço: " + dados.troco + "\n" +
         "PK: " + dados.pkIni + " a " + dados.pkFim + "\n" +

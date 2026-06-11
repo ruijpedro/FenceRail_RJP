@@ -1,6 +1,6 @@
 {
-  "appId": "com.rjp.fencerail",
-  "appName": "FenceRail_RJP",
+  "appId": "com.rjp.vedacoes",
+  "appName": "Vedações",
   "webDir": "dist",
   "bundledWebRuntime": false,
   "plugins": {

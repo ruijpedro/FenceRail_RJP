@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>FenceRail_RJP</title>
+<title>Vedações</title>
 <style>
 :root{--azul:#002d5e;--azul2:#004f9f;--azul3:#0b3b78;--claro:#eef2f7;--texto:#102033;--cyan:#74c8ff}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -62,6 +62,7 @@ body{font-family:Arial,Helvetica,sans-serif;background:var(--claro);color:var(--
       <button class="btn light" onclick="gpsFim()">Marcar GPS Fim</button><div class="small" id="gps2">GPS fim não registado</div>
       <button class="btn green" onclick="guardarLocal()">Guardar na APP</button>
       <button class="btn" onclick="sincronizarSheets()">Sincronizar</button>
+      <button class="btn dark" onclick="atualizarDados()">Atualizar</button>
       <button class="btn orange" onclick="gerarPdfDrive()">Gerar PDF / Guardar Drive / Partilhar</button>
       <button class="btn dark" onclick="mostrar('home')">Voltar ao Início</button>
       <div class="small" id="msg">Sem sincronização efetuada.</div>
@@ -71,7 +72,7 @@ body{font-family:Arial,Helvetica,sans-serif;background:var(--claro);color:var(--
   <section id="mapa" class="hidden"><div class="card"><div class="section-title">Mapa</div><p>O mapa será ligado aos pontos GPS de início/fim das vedações.</p><button class="btn dark" onclick="mostrar('home')">Voltar</button></div></section>
   <div class="bottom-brand"><div class="bottom-left"><div class="train">🚆</div><div><h3>Vedações</h3><p>Ambiente Ferroviário</p></div></div><img class="mini-logo" src="logo_rjp.png" alt="RJP"></div>
   <div class="nav"><button onclick="mostrar('home')"><span class="ico">⌂</span>Início</button><button onclick="mostrar('cadastro')"><span class="ico">▣</span>Inspeções</button><button onclick="mostrar('relatorios')"><span class="ico">▥</span>Relatórios</button><button><span class="ico">🔔</span>Alertas</button><button><span class="ico">⚙</span>Config.</button></div>
-  <div class="footer-note">RJP Rail Suite • FenceRail_RJP</div>
+  <div class="footer-note">RJP Rail Suite • Vedações IP</div>
 </main>
 <script>
 const SCRIPT_URL="https://script.google.com/macros/s/AKfycbwfXqxd1vab0H7H0IUSYQQvO05W2qirTGGTP0AfctDBBSo5-V9GHgKDqdaBF3o4LANz/exec";
@@ -81,9 +82,13 @@ function estadoCor(){const estado=document.getElementById('estado').value;const 
 function gpsInicio(){navigator.geolocation.getCurrentPosition(p=>{gpsInicioValor=p.coords.latitude.toFixed(6)+','+p.coords.longitude.toFixed(6);document.getElementById('gps1').innerHTML=gpsInicioValor},()=>alert('Não foi possível obter GPS.'),{enableHighAccuracy:true,timeout:10000})}
 function gpsFim(){navigator.geolocation.getCurrentPosition(p=>{gpsFimValor=p.coords.latitude.toFixed(6)+','+p.coords.longitude.toFixed(6);document.getElementById('gps2').innerHTML=gpsFimValor},()=>alert('Não foi possível obter GPS.'),{enableHighAccuracy:true,timeout:10000})}
 function recolherDados(){return{linha:document.getElementById('linha').value,troco:document.getElementById('troco').value,pkIni:document.getElementById('pkIni').value,pkFim:document.getElementById('pkFim').value,lado:document.getElementById('lado').value,tipoNorma:document.getElementById('tipoNorma').value,tipologia:document.getElementById('tipologia').value,estado:document.getElementById('estado').value,obs:document.getElementById('obs').value,acao:document.getElementById('acao').value,gpsInicio:gpsInicioValor,gpsFim:gpsFimValor}}
-function guardarLocal(){const dados=recolherDados();let lista=JSON.parse(localStorage.getItem('fencerail')||'[]');lista.push(dados);localStorage.setItem('fencerail',JSON.stringify(lista));alert('Inspeção guardada na APP.')}
+function guardarLocal(){const dados=recolherDados();let lista=JSON.parse(localStorage.getItem('vedacoes')||'[]');lista.push(dados);localStorage.setItem('vedacoes',JSON.stringify(lista));alert('Inspeção guardada na APP.')}
+function atualizarDados(){
+  location.reload();
+}
+
 function sincronizarSheets(){const dados=recolherDados();fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(dados)});document.getElementById('msg').innerHTML='Sincronização enviada para Google Sheets.';alert('Sincronização enviada.')}
-function gerarPdfDrive(){const dados=recolherDados();fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(dados)}).then(r=>r.json()).then(res=>{if(res.status==='OK'){ultimoPdfUrl=res.pdf;document.getElementById('msg').innerHTML='PDF guardado no Google Drive.';const texto='Inspeção de Vedações - FenceRail_RJP\n\nLinha: '+dados.linha+'\nTroço: '+dados.troco+'\nPK: '+dados.pkIni+' a '+dados.pkFim+'\n\nPDF: '+ultimoPdfUrl;if(navigator.share){navigator.share({title:'Inspeção de Vedações',text:texto,url:ultimoPdfUrl}).catch(()=>{})}else{window.location.href='https://wa.me/?text='+encodeURIComponent(texto)}}else{alert('Erro ao gerar PDF: '+res.erro)}}).catch(err=>alert('Erro ao comunicar com Google Drive: '+err))}
+function gerarPdfDrive(){const dados=recolherDados();fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(dados)}).then(r=>r.json()).then(res=>{if(res.status==='OK'){ultimoPdfUrl=res.pdf;document.getElementById('msg').innerHTML='PDF guardado no Google Drive.';const texto='Inspeção de Vedações - Vedações\n\nLinha: '+dados.linha+'\nTroço: '+dados.troco+'\nPK: '+dados.pkIni+' a '+dados.pkFim+'\n\nPDF: '+ultimoPdfUrl;if(navigator.share){navigator.share({title:'Inspeção de Vedações',text:texto,url:ultimoPdfUrl}).catch(()=>{})}else{window.location.href='https://wa.me/?text='+encodeURIComponent(texto)}}else{alert('Erro ao gerar PDF: '+res.erro)}}).catch(err=>alert('Erro ao comunicar com Google Drive: '+err))}
 </script>
 </body>
 </html>
