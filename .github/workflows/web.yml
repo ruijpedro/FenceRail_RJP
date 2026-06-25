@@ -1,9 +1,9 @@
 name: Build Web App
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main ]
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -15,19 +15,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
+      - name: Reset npm
+        run: |
+          rm -rf node_modules package-lock.json
+          npm cache clean --force
+
       - name: Install dependencies
-        run: npm install
+        run: npm install vite @vitejs/plugin-react react react-dom --no-audit --no-fund --legacy-peer-deps
 
       - name: Build Web App
-        run: npm run build
+        run: npx vite build
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
@@ -37,12 +40,8 @@ jobs:
   deploy:
     needs: build-web
     runs-on: ubuntu-latest
-
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - uses: actions/deploy-pages@v4
